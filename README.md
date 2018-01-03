@@ -45,4 +45,5 @@ Generator network:
 For ease of understanding, I fix all the values(i.e. input shape).
 ## Run
 You need download data set CUB200-2011(http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), and place images in 'CUB200-2011/images/'.
+
 python train.py to run.
