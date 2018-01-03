@@ -14,7 +14,7 @@ import cv2
 import os
 import time
 TRAIN_LOG_DIR = os.path.join('Log/train/', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
-TRAIN_CHECK_POINT = 'check_point/train_model.ckpt'
+TRAIN_CHECK_POINT = 'check_point/'+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 BATCH_SIZE = 128
 IMG_HEIGHT = manage_images.IMG_HEIGHT
 IMG_WIDTH = manage_images.IMG_WIDTH
@@ -104,9 +104,4 @@ with tf.Graph().as_default():
             g_images = G_logits.eval({noise_input:batch_noise})
             image = manage_images.merge_images(g_images)
             imsave(join(image_save_path, 'epoch' + str(epoch + 1) + '.jpg'), image)
-            saver.save(sess, TRAIN_CHECK_POINT, global_step=epoch)
-
-
-
-
-
+            saver.save(sess, TRAIN_CHECK_POINT + 'train_model.ckpt', global_step=epoch)
