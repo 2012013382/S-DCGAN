@@ -45,7 +45,13 @@ def data_processing(batch_size=32):
         for j in range(len(image_set[i])):
             images.append(image_set[i][j, :, :, :])
     np_image_set = np.array(images, np.float32)
-
+    sh_image_set = np.zeros_like(images, np.float32)
+	#Shuffle data
+	idx = np.random.permutation(len(np_image_set))
+	count = 0
+	for i in idx:
+	     sh_image_set[count, :, :, :] = np_image_set[i, :, :, :]
+		 count += 1
     #Prepare data batches, I know there are better ways to get data batches, but I sample them directly for ease of understanding.
     pointer = 0
     batch_image_set = []
@@ -67,6 +73,3 @@ def merge_images(images):
             img[IMG_HEIGHT * i : IMG_HEIGHT * (i+1), IMG_WIDTH * j : IMG_WIDTH * (j+1), :] = images[count, :, :, :]
             count += 1
     return img
-
-
-
