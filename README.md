@@ -10,7 +10,7 @@ Data: CUB200-2011(11788 birds) http://www.vision.caltech.edu/visipedia/CUB-200-2
 ## Details
 This implementation is a little different from the paper <UNSUPERVISED REPRESENTATION LEARNING WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS>. 
 
-Discriminator network:
+### Discriminator network:
 
    Input: [BATCH_SIZE, 64, 64 ,3]
    
@@ -26,7 +26,7 @@ Discriminator network:
    
    fc5: [BATCH_SIZE, 1]   
 
-Generator network:
+### Generator network:
 
    Input: [BATCH_SIZE, 100]
    
@@ -45,7 +45,8 @@ Generator network:
 For ease of understanding, I fix all the values(i.e. input shape).
 ## Usage
 You need download data set CUB200-2011(http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), and place images in 'CUB200-2011/images/'.
-
-python train.py to run.
+```Bash
+python train.py
+```
 ## Reference
 https://github.com/carpedm20/DCGAN-tensorflow
