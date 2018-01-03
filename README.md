@@ -43,7 +43,9 @@ Generator network:
    conv_tran4: [BATCH_SIZE, 64, 64, 3]
 
 For ease of understanding, I fix all the values(i.e. input shape).
-## Run
+## Usage
 You need download data set CUB200-2011(http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), and place images in 'CUB200-2011/images/'.
 
 python train.py to run.
+## Reference
+https://github.com/carpedm20/DCGAN-tensorflow
