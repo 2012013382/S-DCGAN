@@ -43,6 +43,8 @@ This implementation is a little different from the paper <UNSUPERVISED REPRESENT
    conv_tran4: [BATCH_SIZE, 64, 64, 3]
 
 For ease of understanding, I fix all the values(i.e. input shape).
+## Parameters
+All the parameters are followed by the paper.
 ## Usage
 You need download data set CUB200-2011(http://www.vision.caltech.edu/visipedia/CUB-200-2011.html), and place images in 'CUB200-2011/images/'.
 ```Bash
