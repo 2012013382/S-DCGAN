@@ -57,7 +57,7 @@ After 50 epoches
 ![](https://github.com/2012013382/S-DCGAN/blob/master/row/epoch51.jpg)
 After 150 epoches
 ![](https://github.com/2012013382/S-DCGAN/blob/master/row/epoch150.jpg)
-After 240 epoches
-![](https://github.com/2012013382/S-DCGAN/blob/master/row/epoch242.jpg)
+After 455 epoches
+![](https://github.com/2012013382/S-DCGAN/blob/master/row/epoch455.jpg)
 ## Reference
 https://github.com/carpedm20/DCGAN-tensorflow
