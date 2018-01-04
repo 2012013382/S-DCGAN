@@ -75,14 +75,14 @@ with tf.Graph().as_default():
             for i in range(images_num // BATCH_SIZE):
                 batch_noise = np.random.uniform(-1, 1, [BATCH_SIZE, NOISE_SIZE]).astype(np.float32)
                 # Run D once and G twice. You can adjust it for your own data sets.
-                summary, _ = sess.run([merged, d_optim], feed_dict={real_input: batch_image_set[i], noise_input: batch_noise})
+                sess.run(d_optim, feed_dict={real_input: batch_image_set[i], noise_input: batch_noise})
                 
                 sess.run(g_optim, feed_dict={noise_input: batch_noise})
                 sess.run(g_optim, feed_dict={noise_input: batch_noise})
 
                 batch_D_fake_loss = sess.run(D_f_loss, feed_dict={noise_input: batch_noise})
                 batch_D_real_loss = sess.run(D_r_loss, feed_dict={real_input: batch_image_set[i]})
-                batch_G_loss = sess.run(G_loss, feed_dict={noise_input: batch_noise})
+                sammury, batch_G_loss = sess.run([merged, G_loss], feed_dict={real_input: batch_image_set[i], noise_input: batch_noise})
 
                 D_fake_loss += batch_D_fake_loss
                 D_real_loss += batch_D_real_loss
