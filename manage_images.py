@@ -12,7 +12,7 @@ CUB_image_path = 'CUB_200_2011/images/'
 IMG_HEIGHT = 64
 IMG_WIDTH = 64
 IMG_CHANNELS = 3
-def read_images_and_attributes(image_path, img_height=64, img_width=64, img_channels=3):
+def read_images(image_path, img_height=64, img_width=64, img_channels=3):
     image_set = []
 
     n = 0
@@ -38,7 +38,7 @@ def read_images_and_attributes(image_path, img_height=64, img_width=64, img_chan
     return image_set#Return shape is list(200, [len(images), img_height, img_width, img_channels])
 
 def data_processing(batch_size=32):
-    image_set = read_images_and_attributes(CUB_image_path, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)
+    image_set = read_images(CUB_image_path, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)
     images = []
 	#Convert data into numpy array
     for i in range(len(image_set)):
