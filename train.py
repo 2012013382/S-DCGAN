@@ -54,10 +54,12 @@ with tf.Graph().as_default():
     print(len(D_vars))                   
     G_vars = [var for var in t_vars if 'generator' in var.name]
     print(len(G_vars))
-    d_optim = tf.train.AdamOptimizer(learning_rate, beta1=beta1) \
-        .minimize(D_loss, var_list=D_vars)
-    g_optim = tf.train.AdamOptimizer(learning_rate, beta1=beta1) \
-        .minimize(G_loss, var_list=G_vars)
+    update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+    with tf.control_dependencies(update_ops):
+        d_optim = tf.train.AdamOptimizer(learning_rate, beta1=beta1) \
+            .minimize(D_loss, var_list=D_vars)
+        g_optim = tf.train.AdamOptimizer(learning_rate, beta1=beta1) \
+            .minimize(G_loss, var_list=G_vars)
     merged = tf.summary.merge_all()
     saver = tf.train.Saver()
     config = tf.ConfigProto()
@@ -77,8 +79,8 @@ with tf.Graph().as_default():
                 # Run D once and G twice. You can adjust it for your own data sets.
                 sess.run(d_optim, feed_dict={real_input: batch_image_set[i], noise_input: batch_noise})
                 
-                sess.run(g_optim, feed_dict={noise_input: batch_noise})
-                sess.run(g_optim, feed_dict={noise_input: batch_noise})
+                sess.run(g_optim, feed_dict={real_input: batch_image_set[i], noise_input: batch_noise})
+                sess.run(g_optim, feed_dict={real_input: batch_image_set[i], noise_input: batch_noise})
 
                 batch_D_fake_loss = sess.run(D_f_loss, feed_dict={noise_input: batch_noise})
                 batch_D_real_loss = sess.run(D_r_loss, feed_dict={real_input: batch_image_set[i]})
