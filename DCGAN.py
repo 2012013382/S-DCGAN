@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
-#Channels of this network is a little different from it in the paper.
+#Channels of this network is a little different from their in the paper.
 '''
 Discriminator network
    Input: [BATCH_SIZE, 64, 64 ,3]
