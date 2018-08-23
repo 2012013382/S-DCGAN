@@ -57,7 +57,7 @@ def discriminator(inputs, reuse=False, training_state=True):#Default input shape
 #Define generator
 def generator(z, training_state=True):#Default shape of z is [batch_size, 100]
     with tf.variable_scope('generator') as scope:
-        with slim.arg_scope([slim.conv2d], padding='SAME',
+        with slim.arg_scope([slim.conv2d, slim.conv2d_transpose], padding='SAME',
                             weights_initializer=tf.truncated_normal_initializer(stddev=0.02),
                             weights_regularizer=slim.l2_regularizer(0.0005),
                             activation_fn=leaky_relu,
@@ -71,13 +71,13 @@ def generator(z, training_state=True):#Default shape of z is [batch_size, 100]
                                         scope='g_fc1')
             net = tf.reshape(net, [-1, 4, 4, 64 * 8])
             net = tf.nn.relu(_batch_norm(net, 'g_bd1', training_state))
-            net = slim.conv2d_transpose(net, num_outputs=64 * 4, kernel_size=[5, 5], stride=2, activation_fn=None, scope='g_conv_tran1')
+            net = slim.conv2d_transpose(net, num_outputs=64 * 4, activation_fn=None, scope='g_conv_tran1')
             net = tf.nn.relu(_batch_norm(net, 'g_bd2', training_state))
-            net = slim.conv2d_transpose(net, num_outputs=64 * 2, kernel_size=[5, 5], stride=2, activation_fn=None, scope='g_conv_tran2')
+            net = slim.conv2d_transpose(net, num_outputs=64 * 2, activation_fn=None, scope='g_conv_tran2')
             net = tf.nn.relu(_batch_norm(net, 'g_bd3', training_state))
-            net = slim.conv2d_transpose(net, num_outputs=64 * 1, kernel_size=[5, 5], stride=2, activation_fn=None, scope='g_conv_tran4')
+            net = slim.conv2d_transpose(net, num_outputs=64 * 1, activation_fn=None, scope='g_conv_tran4')
             net = tf.nn.relu(_batch_norm(net, 'g_bd4', training_state))
-            net = slim.conv2d_transpose(net, num_outputs=3, kernel_size=[5, 5], stride=2, activation_fn=None, scope='g_conv_tran5')
+            net = slim.conv2d_transpose(net, num_outputs=3, activation_fn=None, scope='g_conv_tran5')
             net = tf.nn.tanh(net)
             
     return net
