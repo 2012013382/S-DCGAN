@@ -34,8 +34,8 @@ if not tf.gfile.Exists(TRAIN_CHECK_POINT):
 batch_image_set, images_num = manage_images.data_processing(batch_size=BATCH_SIZE)
 
 with tf.Graph().as_default():
-    real_input = tf.placeholder(tf.float32, [BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS])
-    noise_input = tf.placeholder(tf.float32, [BATCH_SIZE, NOISE_SIZE])
+    real_input = tf.placeholder(tf.float32, [None, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS])
+    noise_input = tf.placeholder(tf.float32, [None, NOISE_SIZE])
 	#One step G, one step D for real images, and one step D for fake images from G.
     G_logits = DCGAN.generator(noise_input)
     r_D_logits, r_D = DCGAN.discriminator(real_input, reuse=False)
